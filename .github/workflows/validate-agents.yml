@@ -1,0 +1,75 @@
+name: Validate Agents
+
+on:
+  push:
+    paths:
+      - 'agents/**'
+      - 'skills/**'
+      - 'scripts/**'
+  pull_request:
+    paths:
+      - 'agents/**'
+      - 'skills/**'
+      - 'scripts/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate agent frontmatter
+        run: |
+          errors=0
+          for file in agents/*.md; do
+            name=$(basename "$file" .md)
+            echo "Checking $name..."
+
+            # Check required fields
+            if ! grep -q "^name:" "$file"; then
+              echo "  ERROR: Missing 'name' field"
+              errors=$((errors + 1))
+            fi
+
+            if ! grep -q "^description:" "$file"; then
+              echo "  ERROR: Missing 'description' field"
+              errors=$((errors + 1))
+            fi
+
+            # Check frontmatter delimiters
+            front_count=$(grep -c "^---$" "$file" || true)
+            if [ "$front_count" -lt 2 ]; then
+              echo "  ERROR: Invalid frontmatter (need opening and closing ---)"
+              errors=$((errors + 1))
+            fi
+
+            echo "  OK"
+          done
+
+          if [ "$errors" -gt 0 ]; then
+            echo "Found $errors validation errors"
+            exit 1
+          fi
+          echo "All agents validated successfully"
+
+      - name: Validate skills
+        run: |
+          for dir in skills/*/; do
+            [ -d "$dir" ] || continue
+            name=$(basename "$dir")
+            if [ ! -f "${dir}SKILL.md" ]; then
+              echo "ERROR: Missing SKILL.md in $dir"
+              exit 1
+            fi
+            echo "Skill $name: OK"
+          done
+          echo "All skills validated"
+
+      - name: Check hook scripts syntax
+        run: |
+          for script in scripts/*.sh; do
+            [ -f "$script" ] || continue
+            bash -n "$script"
+            echo "$(basename "$script"): syntax OK"
+          done
+          echo "All hook scripts validated"
