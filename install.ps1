@@ -101,12 +101,12 @@ function Install-Agents {
     $colors = @{
         cybersentinel = "Red"; codecraft = "Blue"; testforge = "Yellow"
         growthforge = "Green"; docmaster = "Magenta"; infraforge = "Cyan"
-        dataforge = "DarkYellow"; apiforge = "White"
+        dataforge = "DarkYellow"; apiforge = "White"; humanforge = "DarkMagenta"
     }
     $tags = @{
         cybersentinel = "SEC"; codecraft = "BPR"; testforge = "TST"
         growthforge = "SEO"; docmaster = "DOC"; infraforge = "OPS"
-        dataforge = "DB"; apiforge = "API"
+        dataforge = "DB"; apiforge = "API"; humanforge = "HMN"
     }
 
     $count = 0
@@ -228,8 +228,8 @@ function Install-Mcps {
 function Invoke-Uninstall {
     Write-Log "Uninstalling Claude Code Agents..."
 
-    $agents = @("cybersentinel","codecraft","testforge","growthforge","docmaster","infraforge","dataforge","apiforge")
-    $skills = @("sec","bpr","tst","seo","doc","ops","db","api","audit","agents-status")
+    $agents = @("cybersentinel","codecraft","testforge","growthforge","docmaster","infraforge","dataforge","apiforge","humanforge")
+    $skills = @("sec","bpr","tst","seo","doc","ops","db","api","hmn","audit","agents-status","security-review","security-requirement-extraction","solidity-security","frontend-design","vercel-react-best-practices","api-design-principles","python-design-patterns","python-performance-optimization","programmatic-seo","web-design-guidelines","seo-audit","mcp-builder","react-doctor","remotion-best-practices","ai-code-detection")
 
     foreach ($dir in @((Join-Path $env:USERPROFILE ".claude\agents"), ".claude\agents")) {
         if (Test-Path $dir) {
@@ -262,16 +262,16 @@ function Show-Verification {
 
     $ac = (Get-ChildItem "$AgentsDir\*.md" -ErrorAction SilentlyContinue | Measure-Object).Count
     $sc = 0
-    foreach ($s in @("sec","bpr","tst","seo","doc","ops","db","api","audit","agents-status")) {
+    foreach ($s in @("sec","bpr","tst","seo","doc","ops","db","api","hmn","audit","agents-status")) {
         if (Test-Path "$SkillsDir\$s\SKILL.md") { $sc++ }
     }
 
-    Write-Host "  Agents: $ac/8" -ForegroundColor Green
-    Write-Host "  Skills: $sc/10" -ForegroundColor Green
+    Write-Host "  Agents: $ac/9" -ForegroundColor Green
+    Write-Host "  Skills: $sc/11" -ForegroundColor Green
     Write-Host ""
     Write-Host "Quick start:" -ForegroundColor Cyan
     Write-Host "  Restart Claude Code, then try:"
-    Write-Host "    /sec   /bpr   /tst   /seo   /doc   /ops   /db   /api   /audit"
+    Write-Host "    /sec  /bpr  /tst  /seo  /doc  /ops  /db  /api  /hmn  /audit"
     Write-Host ""
 }
 
@@ -287,7 +287,7 @@ function Show-Banner {
     Write-Host ""
     Write-Host "  SEC CyberSentinel   SEO GrowthForge   OPS InfraForge"
     Write-Host "  BPR CodeCraft       TST TestForge     DB  DataForge"
-    Write-Host "  DOC DocMaster       API APIForge"
+    Write-Host "  DOC DocMaster       API APIForge      HMN HumanForge"
     Write-Host ""
 }
 

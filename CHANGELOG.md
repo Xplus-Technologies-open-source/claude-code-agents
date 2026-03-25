@@ -5,6 +5,24 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-03-25
+
+### Added
+
+- New agent: HumanForge (HMN) — AI code detection, code humanization, and git hygiene enforcement
+- New invocation skill: `/hmn` for AI code authenticity reviews
+- New hook script: `validate-no-ai-mentions.sh` — blocks git push/commit with AI mentions
+- 15 knowledge skills distributed with the repo: security-review, security-requirement-extraction, solidity-security, frontend-design, vercel-react-best-practices, api-design-principles, python-design-patterns, python-performance-optimization, programmatic-seo, web-design-guidelines, seo-audit, mcp-builder, react-doctor, remotion-best-practices, ai-code-detection
+- All agents now have self-contained knowledge — no dependency on built-in skills
+
+### Changed
+
+- CyberSentinel: added `solidity-security` to skills frontmatter
+- CodeCraft: added `react-doctor` and `remotion-best-practices` to skills
+- TestForge: added `react-doctor` to skills
+- All three installers (bash, Python, PowerShell) updated for 9 agents, 26 skills, 4 hooks
+- README updated with HumanForge documentation, knowledge skills tree, and updated counts
+
 ## [2.0.0] - 2026-03-22
 
 ### Added

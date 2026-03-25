@@ -27,18 +27,25 @@ SCRIPT_DIR = Path(__file__).parent.resolve()
 
 AGENTS = [
     "cybersentinel", "codecraft", "testforge", "growthforge",
-    "docmaster", "infraforge", "dataforge", "apiforge",
+    "docmaster", "infraforge", "dataforge", "apiforge", "humanforge",
 ]
 
 SKILLS = [
-    "sec", "bpr", "tst", "seo", "doc", "ops", "db", "api",
+    "sec", "bpr", "tst", "seo", "doc", "ops", "db", "api", "hmn",
     "audit", "agents-status",
+    "security-review", "security-requirement-extraction", "solidity-security",
+    "frontend-design", "vercel-react-best-practices", "api-design-principles",
+    "python-design-patterns", "python-performance-optimization",
+    "programmatic-seo", "web-design-guidelines", "seo-audit",
+    "mcp-builder", "react-doctor", "remotion-best-practices",
+    "ai-code-detection",
 ]
 
 HOOKS = [
     "validate-no-destructive.sh",
     "validate-readonly-query.sh",
     "validate-infra-commands.sh",
+    "validate-no-ai-mentions.sh",
 ]
 
 AGENT_TAGS = {
@@ -50,6 +57,7 @@ AGENT_TAGS = {
     "infraforge":    ("OPS", "\033[1;36m"),
     "dataforge":     ("DB",  "\033[1;38;5;208m"),
     "apiforge":      ("API", "\033[1;37m"),
+    "humanforge":    ("HMN", "\033[1;38;5;213m"),
 }
 
 RESET = "\033[0m"
@@ -288,12 +296,12 @@ def verify(dirs):
     ac = sum(1 for a in AGENTS if (dirs["agents"] / f"{a}.md").exists())
     sc = sum(1 for s in SKILLS if (dirs["skills"] / s / "SKILL.md").exists())
 
-    print(f"  Agents: {ac}/8")
-    print(f"  Skills: {sc}/10")
+    print(f"  Agents: {ac}/9")
+    print(f"  Skills: {sc}/{len(SKILLS)}")
     print()
     print("\033[1;36mQuick start:\033[0m")
     print("  Restart Claude Code, then try:")
-    print("    /sec  /bpr  /tst  /seo  /doc  /ops  /db  /api  /audit")
+    print("    /sec  /bpr  /tst  /seo  /doc  /ops  /db  /api  /hmn  /audit")
     print()
 
 # ============================================================================

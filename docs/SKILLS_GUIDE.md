@@ -37,6 +37,7 @@ Invocation skills provide slash commands that trigger agent execution. This proj
 | `/ops` | ops | fork | infraforge | Infrastructure review |
 | `/db` | db | fork | dataforge | Database audit |
 | `/api` | api | fork | apiforge | API design review |
+| `/hmn` | hmn | fork | humanforge | AI code detection and humanization |
 | `/audit` | audit | — | Multi-agent pipeline | Full audit: SEC -> BPR -> TST -> DOC |
 | `/agents-status` | agents-status | — | — | Show system status |
 
@@ -112,6 +113,12 @@ Use $ARGUMENTS to reference the user's input.
 | `seo-audit` | Structured audit process for comprehensive SEO reviews |
 | `programmatic-seo` | Template-based page generation at scale |
 | `web-design-guidelines` | Design patterns that impact SEO and conversion |
+
+### HumanForge (HMN)
+
+| Skill | Purpose |
+|-------|---------|
+| `ai-code-detection` | Comprehensive AI code pattern catalog, detection heuristics, humanization techniques, and git hygiene rules |
 
 ## Creating Your Own Skills
 

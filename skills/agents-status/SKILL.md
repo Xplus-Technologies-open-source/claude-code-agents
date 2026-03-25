@@ -27,6 +27,7 @@ Display the status of all installed custom agents.
 | infraforge | cyan | /ops |
 | dataforge | orange | /db |
 | apiforge | white | /api |
+| humanforge | magenta | /hmn |
 
 ## Output Format
 
@@ -34,4 +35,4 @@ Use a clean table format. Mark each item with a status indicator:
 - Connected/Available/Exists
 - Missing/Disconnected/Not Found
 
-At the end, show a summary: X/8 agents installed, Y MCPs connected, Z skills available.
+At the end, show a summary: X/9 agents installed, Y MCPs connected, Z skills available.

@@ -31,6 +31,7 @@ mcpServers:
 skills:
   - security-review
   - security-requirement-extraction
+  - solidity-security
 hooks:
   PreToolUse:
     - matcher: "Bash"

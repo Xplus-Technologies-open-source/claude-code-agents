@@ -139,6 +139,7 @@ install_agents() {
       infraforge)     echo -e "  ${CYAN}OPS${RESET}  $name" ;;
       dataforge)      echo -e "  ${ORANGE}DB${RESET}   $name" ;;
       apiforge)       echo -e "  ${WHITE}API${RESET}  $name" ;;
+      humanforge)     echo -e "  ${PURPLE}HMN${RESET}  $name" ;;
       *)              echo -e "       $name" ;;
     esac
     count=$((count + 1))
@@ -272,8 +273,8 @@ install_mcps() {
 uninstall() {
   log "Uninstalling Claude Code Agents..."
 
-  local agents=(cybersentinel codecraft testforge growthforge docmaster infraforge dataforge apiforge)
-  local skills=(sec bpr tst seo doc ops db api audit agents-status)
+  local agents=(cybersentinel codecraft testforge growthforge docmaster infraforge dataforge apiforge humanforge)
+  local skills=(sec bpr tst seo doc ops db api hmn audit agents-status security-review security-requirement-extraction solidity-security frontend-design vercel-react-best-practices api-design-principles python-design-patterns python-performance-optimization programmatic-seo web-design-guidelines seo-audit mcp-builder react-doctor remotion-best-practices ai-code-detection)
 
   for dir in "$HOME/.claude/agents" ".claude/agents"; do
     [ -d "$dir" ] || continue
@@ -307,25 +308,25 @@ verify() {
   echo ""
 
   local agent_count=0
-  for agent in cybersentinel codecraft testforge growthforge docmaster infraforge dataforge apiforge; do
+  for agent in cybersentinel codecraft testforge growthforge docmaster infraforge dataforge apiforge humanforge; do
     if [ -f "$AGENTS_DIR/$agent.md" ]; then
       agent_count=$((agent_count + 1))
     fi
   done
 
   local skill_count=0
-  for skill in sec bpr tst seo doc ops db api audit agents-status; do
+  for skill in sec bpr tst seo doc ops db api hmn audit agents-status; do
     [ -f "$SKILLS_DIR/$skill/SKILL.md" ] && skill_count=$((skill_count + 1))
   done
 
   local hook_count=0
-  for hook in validate-no-destructive.sh validate-readonly-query.sh validate-infra-commands.sh; do
+  for hook in validate-no-destructive.sh validate-readonly-query.sh validate-infra-commands.sh validate-no-ai-mentions.sh; do
     [ -x "$SCRIPTS_DIR/$hook" ] 2>/dev/null && hook_count=$((hook_count + 1))
   done
 
-  echo -e "  Agents:  ${GREEN}$agent_count/8${RESET}"
-  echo -e "  Skills:  ${GREEN}$skill_count/10${RESET}"
-  echo -e "  Hooks:   ${GREEN}$hook_count/3${RESET}"
+  echo -e "  Agents:  ${GREEN}$agent_count/9${RESET}"
+  echo -e "  Skills:  ${GREEN}$skill_count/11${RESET}"
+  echo -e "  Hooks:   ${GREEN}$hook_count/4${RESET}"
   echo ""
 
   echo -e "${CYAN}Quick start:${RESET}"
@@ -338,6 +339,7 @@ verify() {
   echo "    /ops      — Infrastructure review"
   echo "    /db       — Database audit"
   echo "    /api      — API design review"
+  echo "    /hmn      — AI code detection & humanization"
   echo "    /audit    — Full multi-agent pipeline"
   echo ""
 }
@@ -354,7 +356,7 @@ banner() {
   echo ""
   echo -e "  ${RED}SEC${RESET} CyberSentinel   ${GREEN}SEO${RESET} GrowthForge   ${CYAN}OPS${RESET} InfraForge"
   echo -e "  ${BLUE}BPR${RESET} CodeCraft       ${YELLOW}TST${RESET} TestForge     ${ORANGE}DB${RESET}  DataForge"
-  echo -e "  ${PURPLE}DOC${RESET} DocMaster       ${WHITE}API${RESET} APIForge"
+  echo -e "  ${PURPLE}DOC${RESET} DocMaster       ${WHITE}API${RESET} APIForge      ${PURPLE}HMN${RESET} HumanForge"
   echo ""
 }
 
